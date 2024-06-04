@@ -1,79 +1,91 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Star Wars Favorites Mobile Application
 
-# Getting Started
+## Overview
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+This project is a mobile application built with React Native (using React Native Init/CLI, not Expo) for both iOS and Android platforms. The application allows users to track and manage their favorite characters from the Star Wars universe. Users can view a list of characters, add characters to their favorites, and see the total count of male, female, and other characters they have favorited. The app also includes a reset button to clear all favorite selections and reset the totals.
 
-## Step 1: Start the Metro Server
+## Features
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+1. **API Integration**: Fetches data from the Star Wars API (SWAPI) to retrieve character information.
+2. **Character List**: Displays a scrollable and paginated list of Star Wars characters.
+3. **Character Details**: Allows users to click on a character to view more details on a dedicated screen.
+4. **Favorites Management**: Users can add characters to their favorites, which updates the total count of male, female, and other characters.
+5. **Reset Functionality**: A reset button to clear all favorite selections and reset the totals to zero.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Technologies and Libraries
 
-```bash
-# using npm
-npm start
+- **React Native**: Framework for building native apps using React.
+- **Axios**: Library for making HTTP requests.
+- **React Navigation**: Library for handling navigation in the app.
+- **Context API**: Used for state management.
+- **Prettier**: Code formatter.
+- **ESLint**: Linter for identifying and fixing code issues.
+- **SWAPI**: Star Wars API for fetching character data.
 
-# OR using Yarn
-yarn start
-```
+## Getting Started
 
-## Step 2: Start your Application
+### Prerequisites
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- **Node.js**: Ensure you have Node.js installed. [Download Node.js](https://nodejs.org/)
+- **React Native CLI**: Install the React Native CLI globally. You can do this by running `npm install -g react-native-cli`.
 
-### For Android
+### Installation
 
-```bash
-# using npm
-npm run android
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/voronine/react-native_app_flat-list
+    cd star-wars-favorites-app
+    ```
 
-# OR using Yarn
-yarn android
-```
+2. Install the dependencies:
+    ```sh
+    npm i
+    ```
 
-### For iOS
+### Running the App
 
-```bash
-# using npm
-npm run ios
+#### iOS
 
-# OR using Yarn
-yarn ios
-```
+1. Install the required CocoaPods dependencies:
+    ```sh
+    cd ios
+    pod install
+    cd ..
+    ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+2. Run the app on an iOS simulator:
+    ```sh
+    npx react-native run-ios
+    ```
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+#### Android
 
-## Step 3: Modifying your App
+1. Start the Android emulator or connect an Android device.
+2. Run the app on an Android device/emulator:
+    ```sh
+    npx react-native run-android
+    ```
 
-Now that you have successfully run the app, let's modify it.
+## Project Structure
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- **src/**: Contains the main source code for the application.
+  - **components/**: Reusable components.
+  - **context/**: Context providers for state management.
+  - **screens/**: Screen components.
+  - **services/**: API services.
+  - **utils/**: Utility functions and constants.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Code Quality
 
-## Congratulations! :tada:
+This project uses ESLint and Prettier to maintain code quality and consistency.
 
-You've successfully run and modified your React Native App. :partying_face:
+## API
 
-### Now what?
+The application uses the [Star Wars API (SWAPI)](https://swapi.py4e.com/) to fetch character data.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## References
 
-# Troubleshooting
+- [Application Reference](https://sw-app-gilt.vercel.app/)
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Feel free to customize the README further based on your specific requirements and preferences.
