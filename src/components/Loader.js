@@ -20,7 +20,9 @@ export const Loader = () => {
 
   return (
     <View style={styles.loader} accessibilityLabel="loader">
-      <Animated.View style={[styles.loaderContent, { transform: [{ rotate }] }]} />
+      <Animated.View
+        style={[styles.loaderContent, { transform: [{ rotate }] }]}
+      />
     </View>
   );
 };

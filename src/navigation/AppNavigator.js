@@ -11,7 +11,10 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="CharactersList">
         <Stack.Screen name="Fans" component={CharactersListScreen} />
-        <Stack.Screen name="CharacterDetails" component={CharacterDetailsScreen} />
+        <Stack.Screen
+          name="CharacterDetails"
+          component={CharacterDetailsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -5,7 +5,8 @@ import Full from '../assets/image/heart-empty.png';
 import Empty from '../assets/image/heart2.png';
 
 const FavoritesButton = ({ character }) => {
-  const { favorites, addToFavorites, removeFromFavorites } = useContext(FavoritesContext);
+  const { favorites, addToFavorites, removeFromFavorites } =
+    useContext(FavoritesContext);
   const isFavorite = favorites.some(fav => fav.url === character.url);
 
   return (
@@ -17,12 +18,8 @@ const FavoritesButton = ({ character }) => {
         } else {
           addToFavorites(character);
         }
-      }}
-    >
-      <Image
-        source={isFavorite ? Empty : Full}
-        style={styles.icon}
-      />
+      }}>
+      <Image source={isFavorite ? Empty : Full} style={styles.icon} />
     </TouchableOpacity>
   );
 };

@@ -1,14 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, ActivityIndicator, Image } from 'react-native';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+  Image,
+} from 'react-native';
 import { fetchCharacters } from '../services/api';
 import { FavoritesContext } from '../context/FavoritesContext';
 import AddToFavoritesButton from '../components/FavoritesButton';
 import Heart from '../assets/image/heart-black.png';
-import Look_up from '../assets/image/look-up.png'
+import Look_up from '../assets/image/look-up.png';
 
 const CharactersListScreen = ({ navigation }) => {
   const [characters, setCharacters] = useState([]);
-  const [sortOrder, setSortOrder] = useState({ 
+  const [sortOrder, setSortOrder] = useState({
     name: 'asc',
     birth_year: 'asc',
     gender: 'asc',
@@ -24,27 +33,29 @@ const CharactersListScreen = ({ navigation }) => {
 
   useEffect(() => {
     loadCharacters();
-  }, []);
+  }, [loadCharacters]);
 
-  const loadCharacters = async () => {
-    if (loading || !hasMore) return;
+  const loadCharacters = useCallback(async () => {
+    if (loading || !hasMore) {
+      return;
+    }
     setLoading(true);
     const data = await fetchCharacters(page);
     setCharacters(prevCharacters => [...prevCharacters, ...data.results]);
     setPage(prevPage => prevPage + 1);
     setHasMore(data.next !== null);
     setLoading(false);
-  };
+  }, [loading, hasMore, page]);
 
-  const handleSearch = (query) => {
+  const handleSearch = query => {
     setSearchQuery(query);
   };
 
   const filtered = characters.filter(character =>
-    character.name.toLowerCase().includes(searchQuery.toLowerCase())
+    character.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const sortBy = (field) => { 
+  const sortBy = field => {
     const order = sortOrder[field] === 'asc' ? 'desc' : 'asc';
     const sortedCharacters = [...filtered].sort((a, b) => {
       const aValue = a[field] || '';
@@ -86,13 +97,10 @@ const CharactersListScreen = ({ navigation }) => {
 
       <View style={styles.body}>
         <View style={styles.search}>
-          <Image
-            source={Look_up}
-            style={styles.look_up}
-          />
+          <Image source={Look_up} style={styles.look_up} />
           <TextInput
             style={styles.searchInput}
-            placeholder='Search'
+            placeholder="Search"
             onChangeText={handleSearch}
             value={searchQuery}
           />
@@ -100,45 +108,62 @@ const CharactersListScreen = ({ navigation }) => {
 
         <View style={styles.headerRow}>
           <Text style={styles.headerFirst}>
-            <Image
-              source={Heart}
-              style={styles.icon}
-            />
+            <Image source={Heart} style={styles.icon} />
           </Text>
 
-          <TouchableOpacity onPress={() => sortBy('name')} style={styles.headerCell}>
-            <Text style={styles.headerCellText}>Name {sortOrder.name === 'asc' ? '↓' : '↑'}</Text>
+          <TouchableOpacity
+            onPress={() => sortBy('name')}
+            style={styles.headerCell}>
+            <Text style={styles.headerCellText}>
+              Name {sortOrder.name === 'asc' ? '↓' : '↑'}
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => sortBy('birth_year')} style={styles.headerCell}>
-            <Text style={styles.headerCellText}>Birth Year {sortOrder.birth_year === 'asc' ? '↓' : '↑'}</Text>
+          <TouchableOpacity
+            onPress={() => sortBy('birth_year')}
+            style={styles.headerCell}>
+            <Text style={styles.headerCellText}>
+              Birth Year {sortOrder.birth_year === 'asc' ? '↓' : '↑'}
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => sortBy('gender')} style={styles.headerCell}>
-            <Text style={styles.headerCellText}>Gender {sortOrder.gender === 'asc' ? '↓' : '↑'}</Text>
+          <TouchableOpacity
+            onPress={() => sortBy('gender')}
+            style={styles.headerCell}>
+            <Text style={styles.headerCellText}>
+              Gender {sortOrder.gender === 'asc' ? '↓' : '↑'}
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => sortBy('home')} style={styles.headerCell}>
-            <Text style={styles.headerCellText}>Home World {sortOrder.home === 'asc' ? '↓' : '↑'}</Text>
+          <TouchableOpacity
+            onPress={() => sortBy('home')}
+            style={styles.headerCell}>
+            <Text style={styles.headerCellText}>
+              Home World {sortOrder.home === 'asc' ? '↓' : '↑'}
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => sortBy('species')} style={styles.headerCell}>
-            <Text style={styles.headerCellText}>Species {sortOrder.species === 'asc' ? '↓' : '↑'}</Text>
+          <TouchableOpacity
+            onPress={() => sortBy('species')}
+            style={styles.headerCell}>
+            <Text style={styles.headerCellText}>
+              Species {sortOrder.species === 'asc' ? '↓' : '↑'}
+            </Text>
           </TouchableOpacity>
         </View>
 
         {filtered.length > 0 ? (
           <FlatList
             data={filtered}
-            keyExtractor={(item) => item.url}
+            keyExtractor={item => item.url}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate(
-                  'CharacterDetails',
-                  { id: item.url.split('/').slice(-2, -1)[0] }
-                )}
-                style={styles.row}
-              >
+                onPress={() =>
+                  navigation.navigate('CharacterDetails', {
+                    id: item.url.split('/').slice(-2, -1)[0],
+                  })
+                }
+                style={styles.row}>
                 <View style={styles.cellFirst}>
                   <AddToFavoritesButton
                     character={item}
