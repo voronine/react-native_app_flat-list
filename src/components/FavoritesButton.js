@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { FavoritesContext } from '../context/FavoritesContext';
+import Full from '../assets/image/heart-empty.png';
+import Empty from '../assets/image/heart2.png';
 
 const FavoritesButton = ({ character }) => {
   const { favorites, addToFavorites, removeFromFavorites } = useContext(FavoritesContext);
@@ -17,9 +19,10 @@ const FavoritesButton = ({ character }) => {
         }
       }}
     >
-      <Text style={styles.icon}>
-        {isFavorite ? '\u2764' : '\u2661'}
-      </Text>
+      <Image
+        source={isFavorite ? Empty : Full}
+        style={styles.icon}
+      />
     </TouchableOpacity>
   );
 };
@@ -32,8 +35,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   icon: {
-    fontSize: 30,
-    color: 'red',
+    width: 20,
+    height: 20,
   },
 });
 

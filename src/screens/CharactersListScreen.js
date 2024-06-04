@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, ActivityIndicator, Image } from 'react-native';
 import { fetchCharacters } from '../services/api';
 import { FavoritesContext } from '../context/FavoritesContext';
 import AddToFavoritesButton from '../components/FavoritesButton';
+import Heart from '../assets/image/heart-black.png';
+import Look_up from '../assets/image/look-up.png'
 
 const CharactersListScreen = ({ navigation }) => {
   const [characters, setCharacters] = useState([]);
@@ -83,15 +85,26 @@ const CharactersListScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.body}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder='Search'
-          onChangeText={handleSearch}
-          value={searchQuery}
-        />
+        <View style={styles.search}>
+          <Image
+            source={Look_up}
+            style={styles.look_up}
+          />
+          <TextInput
+            style={styles.searchInput}
+            placeholder='Search'
+            onChangeText={handleSearch}
+            value={searchQuery}
+          />
+        </View>
 
         <View style={styles.headerRow}>
-          <Text style={styles.headerFirst}></Text>
+          <Text style={styles.headerFirst}>
+            <Image
+              source={Heart}
+              style={styles.icon}
+            />
+          </Text>
 
           <TouchableOpacity onPress={() => sortBy('name')} style={styles.headerCell}>
             <Text style={styles.headerCellText}>Name {sortOrder.name === 'asc' ? '↓' : '↑'}</Text>
@@ -206,6 +219,14 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: '#fff',
   },
+  search: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  look_up: {
+    width: 30,
+    height: 30,
+  },
   searchInput: {
     borderWidth: 0,
     paddingHorizontal: 10,
@@ -216,11 +237,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
+  icon: {
+    width: 15,
+    height: 15,
+  },
   headerFirst: {
-    width: 25,
+    width: 30,
     paddingRight: 10,
+    paddingTop: 15,
+    paddingLeft: 5,
     borderTopWidth: 1,
     borderTopColor: '#ccc',
+    textAlign: 'center',
   },
   headerCell: {
     flex: 1,
@@ -245,9 +273,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cellFirst: {
-    width: 25,
+    width: 30,
     justifyContent: 'center',
     paddingRight: 10,
+    paddingLeft: 5,
   },
   cell: {
     flex: 1,
