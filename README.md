@@ -29,12 +29,14 @@ This project is a mobile application built with React Native (using React Native
 - **Node.js**: Ensure you have Node.js installed. [Download Node.js](https://nodejs.org/)
 - **React Native CLI**: Install the React Native CLI globally. You can do this by running `npm install -g react-native-cli`.
 
+![App Screenshot](assets/image/screenshot.png)
+
 ### Installation
 
 1. Clone the repository:
     ```sh
     git clone https://github.com/voronine/react-native_app_flat-list
-    cd star-wars-favorites-app
+    cd react-native_app_flat-list
     ```
 
 2. Install the dependencies:
